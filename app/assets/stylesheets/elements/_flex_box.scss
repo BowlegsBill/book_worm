@@ -1,0 +1,102 @@
+@include bem-block(flex-box) {
+  display: flex;
+  position: relative;
+
+  @include bem-element(item) {
+
+  }
+  @include bem-element(item, $modifier: expandable) {
+    flex-grow: 1;
+  }
+  @include bem-element(item, $modifier: padded) {
+    padding: 20px;
+  }
+  @include bem-element(item, $modifier: spaced){
+    margin: 0 20px !important;
+  }
+  @include bem-element(item, $modifier: vertically-spaced){
+    margin: 20px 0 !important;
+  }
+  @include bem-element(item, $modifier: bordered) {
+    border: 1px solid $gainsboro;
+  }
+  @include bem-element(item, $modifier: full) {
+    flex-basis: 100%;
+  }
+  @include bem-element(item, $modifier: three-quarters) {
+    flex-basis: 75%;
+  }
+  @include bem-element(item, $modifier: two-thirds) {
+    flex-basis: 66.666%;
+  }
+  @include bem-element(item, $modifier: half) {
+    flex-basis: 50%;
+  }
+  @include bem-element(item, $modifier: third) {
+    flex-basis: 33.333%;
+  }
+  @include bem-element(item, $modifier: quarter) {
+    flex-basis: 25%;
+  }
+  @include bem-element(item, $modifier: text-center) {
+    text-align: center;
+  }
+  @include bem-element(item, $modifier: bottom) {
+    align-self: flex-end;
+  }
+  @include bem-element(item, $modifier: start) {
+    align-self: flex-start;
+  }
+
+  @include bem-element(item-label) {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: 600;
+  }
+}
+
+@include bem-block(flex-box, $modifier: space-between) {
+  justify-content: space-between;
+}
+@include bem-block(flex-box, $modifier: space-around) {
+  justify-content: space-around;
+}
+@include bem-block(flex-box, $modifier: align-center) {
+  align-items: center;
+}
+@include bem-block(flex-box, $modifier: column) {
+  flex-direction: column;
+}
+@include bem-block(flex-box, $modifier: centered) {
+  justify-content: center;
+}
+@include bem-block(flex-box, $modifier: bordered) {
+  border: 1px solid $gainsboro;
+}
+@include bem-block(flex-box, $modifier: border-bottom) {
+  border-bottom: 1px solid $gainsboro;
+}
+@include bem-block(flex-box, $modifier: wrapped) {
+  flex-wrap: wrap;
+}
+@include bem-block(flex-box, $modifier: spaced) {
+  margin-bottom: 20px;
+}
+@include bem-block(flex-box, $modifier: indent) {
+  margin-left: 40px;
+}
+@include bem-block(flex-box, $modifier: padded) {
+  padding: 20px;
+}
+@include bem-block(flex-box, $modifier: half-padded) {
+  padding: 10px;
+}
+@include bem-block(flex-box, $modifier: aligned-to-start) {
+  align-items: flex-start;
+}
+@each $colorname, $color in $color-list {
+  @include bem-block(flex-box, $modifier: background-#{$colorname}) {
+    background-color: $color;
+  }
+}

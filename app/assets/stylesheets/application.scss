@@ -1,0 +1,40 @@
+// Imported from gems
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// Contain fonts, color definitions etc.
+@import 'settings/variables';
+
+// Globally used mixins and functions
+@import 'tools/mixins';
+@import 'tools/bem_mixins';
+
+// Reset and/or normalize styles
+@import 'generic/normalize';
+
+@import 'elements/flex_box';
+@import 'elements/content_wrap';
+
+/*
+             <-------------- Reach -------------->
+             -------------------------------------
+         \   \              Settings             /   /
+          \   \---------------------------------/   /
+           \   \             Tools             /   /
+            \   \-----------------------------/   E
+             S   \          Generic          /   x
+              p   \-------------------------/   p
+               e   \        Elements       /   l
+                c   \---------------------/   i
+                 i   \      Blocks       /   c
+                  f   \-----------------/   i
+                   i   \   Components  /   t
+                    c   \-------------/   n
+                     i   \  Trumps   /   e
+                      t   \         /   s
+                       y   \       /   s
+                        \   \     /   /
+                         \   \   /   /
+                          \   \ /   /
+*/
+
