@@ -1,0 +1,30 @@
+@include bem-block(tab-links) {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin-bottom: 0;
+
+  @include bem-element(link) {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  @include bem-element(link, $pseudo-class: hover) {
+    background-color: $whisper;
+  }
+
+  @include bem-element(link, $modifier: active) {
+    background-color: $curious-blue;
+    color: #FFF;
+  }
+
+  @include bem-element(link, $modifier: active) {
+    background-color: $curious-blue;
+    color: #FFF;
+  }
+
+  @include bem-element(link, $modifier: active, $pseudo-class: hover) {
+    background-color: $curious-blue;
+    color: #FFF;
+  }
+}

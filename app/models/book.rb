@@ -20,6 +20,10 @@ class Book < ApplicationRecord
   # ----------------------------------------------------------------
   # Validations
   # ----------------------------------------------------------------
+  validates(
+    :title,
+    uniqueness: true
+  )
 
   # ----------------------------------------------------------------
   # Callbacks
@@ -32,6 +36,8 @@ class Book < ApplicationRecord
   # ----------------------------------------------------------------
   # Scopes
   # ----------------------------------------------------------------
+  scope :unread, -> { joins(:books_readers).where(books_readers: { read: false }) }
+  scope :read, -> { joins(:books_readers).where(books_readers: { read: true }) }
 
   # ----------------------------------------------------------------
   # Other
@@ -44,9 +50,16 @@ class Book < ApplicationRecord
   # ----------------------------------------------------------------
   # Instance Methods
   # ----------------------------------------------------------------
+  def on_reading_list?(reader_id)
+    books_readers.find_by_reader_id(reader_id).present?
+  end
+
+  def been_read?(reader_id)
+    return false unless on_reading_list?(reader_id)
+    books_readers.find_by_reader_id(reader_id).read
+  end
 
   protected
 
   private
-
 end

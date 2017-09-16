@@ -2,8 +2,39 @@ class BooksController < ApplicationController
   before_action :authenticate_reader!
   before_action :ensure_json_request
 
+  def index
+    books = Book.all.order(created_at: :desc).map do |book|
+      book.as_json.merge(
+        reading_list: book.on_reading_list?(current_reader.id),
+        read: book.been_read?(current_reader.id)
+      )
+    end
+    render json: books
+  end
+
+  def reading_list
+    books = current_reader.books.unread.order(created_at: :desc).map do |book|
+      book.as_json.merge(
+        reading_list: book.on_reading_list?(current_reader.id),
+        read: book.been_read?(current_reader.id)
+      )
+    end
+    render json: books
+  end
+
+  def read_list
+    books = current_reader.books.read.order(created_at: :desc).map do |book|
+      book.as_json.merge(
+        reading_list: book.on_reading_list?(current_reader.id),
+        read: book.been_read?(current_reader.id)
+      )
+    end
+    render json: books
+  end
+
   def create
-    book = current_reader.books.create(book_params)
+    book = Book.new(book_params)
+    book.save!
     render json: book
   end
 

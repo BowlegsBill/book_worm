@@ -47,6 +47,7 @@ $smoke: #EEE;
 $white-smoke: #F6F6F6;
 $alabaster: #FAFAFA;
 $dark-white-smoke: #d4d4d4;
+$whisper: #E7E7E7;
 
 
 /* --------------------------------------------------
@@ -81,70 +82,4 @@ $edgewater: #C9E4D2;
 /* --------------------------------------------------
   Blues
 -------------------------------------------------- */
-$summer-sky: #3CB8E4; // Main CloudCentre blue
-$alice-blue: #E6F7FF; // Very light blue
-$malibu: #59C3DC;
-$pattens-blue: #DCEBFF;
-
-/* --------------------------------------------------
-  Reds
--------------------------------------------------- */
-$cinderella: #FCD8CD;
-
-/* --------------------------------------------------
-  Viaje Colours
--------------------------------------------------- */
-
-// Base Colors
-$viaje-blue: #00BAEA;
-$viaje-blue-light: #C0E2FF;
-$viaje-blue-extra-light: #EAF6FE;
-$viaje-blue-dark: #2F809E;
-
-$viaje-orange: #FC9B00;
-$viaje-orange-light: #F6C46B;
-$viaje-orange-dark: #936014;
-
-$viaje-green: #3D8A54;
-$viaje-green-light: #92C7A3;
-$viaje-green-extra-light: #E5F2E8;
-$viaje-green-dark: #265735;
-
-$viaje-red: #A0492F;
-$viaje-red-light: #EB9C85;
-$viaje-red-extra-light: #F9ECE8;
-$viaje-red-dark: #4C1100;
-
-$viaje-grey: #777;
-$viaje-grey-light: #E3E5E2;
-
-// Alert colors
-$viaje-alert-blue-background: #C2DFF4;
-$viaje-alert-blue-text: #418BA9;
-$viaje-alert-blue-cross: #8AB9D1;
-
-$viaje-alert-green-background: #92C4A2;
-$viaje-alert-green-text: #285737;
-$viaje-alert-green-cross: #5E9671;
-
-$viaje-alert-red-background: #E99C87;
-$viaje-alert-red-text: #47182B;
-$viaje-alert-red-cross: #CB7B66;
-
-$viaje-alert-orange-background: #F4C371;
-$viaje-alert-orange-text: #91601F;
-$viaje-alert-orange-cross: #CC9B50;
-
-// Comments colours
-$viaje-comment-yellow-background: #D9EDF7;
-$viaje-comment-yellow-text: #31708F;
-$viaje-comment-yellow-border: #BCE8F1;
-
-$viaje-comment-blue-background: #FCF8E3;
-$viaje-comment-blue-text: #8A7955;
-$viaje-comment-blue-border: #FAEBCC;
-
-
-// Default theme
-$theme-color: $viaje-blue !default;
-$theme-color-dark: $viaje-blue-dark !default;
+$curious-blue: #337AB7;

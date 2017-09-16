@@ -1,0 +1,17 @@
+@include bem-block(content-section) {
+  border: 1px solid $whisper;
+
+  @include bem-element(header) {
+    background-color: $curious-blue;
+    padding: 10px;
+    color: #FFF;
+  }
+
+  @include bem-element(title) {
+    margin: 0;
+  }
+
+  @include bem-element(content) {
+    padding: 20px;
+  }
+}

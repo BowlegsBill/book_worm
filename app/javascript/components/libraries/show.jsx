@@ -1,84 +1,58 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+import Books from './books'
+import BookForm from './book_form'
+import ReadingList from './reading_list'
+import ReadList from './read_list'
 
 class Show extends React.Component {
 
-  initialState() {
-    return { title: '', author: '', }
-  }
-
   constructor(props) {
     super(props)
-    this.state = this.initialState()
     this.state = {
-      books: this.props.books
+      selected: 'All Books'
     }
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
-    $.ajax({
-      url: this.props.path,
-      data: { book: this.state },
-      type: 'POST',
-      dataType: 'json',
-      success: (data) => {
-        var books = this.state.books.slice()
-        books.unshift(data)
-        this.setState({books: books})
-        this.setState(this.initialState())
-      }
-    })
+  tabLinks(link) {
+    if (this.state.selected == link) {
+      return 'tab-links__link tab-links__link--active'
+    } else {
+      return 'tab-links__link'
+    }
   }
 
-  handleChange(e) {
-    var name = e.target.name
-    this.setState({name: e.target.value})
+  renderSelected() {
+    if (this.state.selected == 'All Books') {
+      return (<Books />)
+    } else if (this.state.selected == 'Reading List') {
+      return(<ReadingList />)
+    } else if (this.state.selected == 'Read List') {
+      return(<ReadList />)
+    } else if (this.state.selected == 'Add Book') {
+       return(
+        <BookForm />
+      )
+    }
   }
 
   render() {
-    var books = this.state.books.map(function(book, index) {
-      return(
-        <tr>
-          <td>{book.title}</td>
-          <td>{book.author}</td>
-        </tr>
-      )
-    })
     return (
       <div className='content-wrap'>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <h2>Add New Book</h2>
-          <div className='form-group'>
-            <label htmlFor='title'>
-              Title
-            </label>
-            <input onChange={(e) => this.setState({title: e.target.value})} className='form-control' id='title' name='title' value={this.state.title} />
+        <div className='content-section'>
+          <ul className='tab-links'>
+            <li className={this.tabLinks('All Books')} onClick={(e) => this.setState({selected: e.target.innerText})}>All Books</li>
+            <li className={this.tabLinks('Reading List')} onClick={(e) => this.setState({selected: e.target.innerText})}>Reading List</li>
+            <li className={this.tabLinks('Read List')} onClick={(e) => this.setState({selected: e.target.innerText})}>Read List</li>
+            <li className={this.tabLinks('Add Book')} onClick={(e) => this.setState({selected: e.target.innerText})}>Add Book</li>
+          </ul>
+          <header className='content-section__header'>
+            <h2 className='content-section__title'>{this.state.selected}</h2>
+          </header>
+          <div className='content-section__content'>
+            {this.renderSelected()}
           </div>
-          <div className='form-group'>
-            <label htmlFor='author'>
-              Author
-            </label>
-            <input onChange={(e) => this.setState({author: e.target.value})} className='form-control' id='author' name='author' value={this.state.author} />
-          </div>
-          <div className='form-group'>
-            <button className='btn btn-primary' type='submit'>
-              Add Book
-            </button>
-          </div>
-        </form>
-        <table className='table table-striped table-hover'>
-          <thead>
-            <tr>
-              <td>Title</td>
-              <td>Author</td>
-            </tr>
-          </thead>
-          <tbody>
-            {books}
-          </tbody>
-        </table>
+        </div>
       </div>
     )
   }
