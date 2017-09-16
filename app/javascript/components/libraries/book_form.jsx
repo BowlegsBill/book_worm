@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 export default class BookForm extends React.Component {
   initialState() {
-    return { title: '', author: '' }
+    return { title: '', author: '', errors: [] }
   }
 
   constructor(props) {
@@ -20,6 +20,9 @@ export default class BookForm extends React.Component {
       dataType: 'json',
       success: (data) => {
         this.setState(this.initialState())
+        if (data.errors.length > 0) {
+          this.setState({errors: data.errors})
+        }
       }
     })
   }
@@ -29,10 +32,26 @@ export default class BookForm extends React.Component {
     this.setState({name: e.target.value})
   }
 
+  showErrors() {
+    if (this.state.errors.length > 0) {
+      var errors = this.state.errors.map(function(error, index) {
+        return(
+          <span key={index}>{error}<br /></span>
+        )
+      })
+      return(
+        <div className='alert alert-danger alert-dismissible' role='alert'>
+          <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          {errors}
+        </div>
+      )
+    }
+  }
+
   render() {
     return(
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <h2>Add New Book</h2>
+        {this.showErrors()}
         <div className='form-group'>
           <label htmlFor='title'>
             Title

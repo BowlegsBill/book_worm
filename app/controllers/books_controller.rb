@@ -34,7 +34,10 @@ class BooksController < ApplicationController
 
   def create
     book = Book.new(book_params)
-    book.save!
+    book.save
+    if book.errors.any?
+      book = book.as_json.merge(errors: book.errors.full_messages.as_json)
+    end
     render json: book
   end
 
