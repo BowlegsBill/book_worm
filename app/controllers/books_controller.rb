@@ -41,12 +41,28 @@ class BooksController < ApplicationController
     render json: book
   end
 
+  def search
+    books = if params[:title]
+              Book.where('title LIKE ?', "%#{params[:title]}%")
+            elsif params[:author]
+              Book.where('author LIKE ?', "%#{params[:author]}%")
+            end
+    books.order(author: :desc).map do |book|
+      book.as_json.merge(
+        reading_list: book.on_reading_list?(current_reader.id),
+        read: book.been_read?(current_reader.id)
+      )
+    end
+    render json: books
+  end
+
   private
 
   def book_params
     params.require(:book).permit(
       :title,
-      :author
+      :author,
+      :genre
     )
   end
 

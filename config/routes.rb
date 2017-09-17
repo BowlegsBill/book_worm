@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resource :library
   resources :books, constraints: { format: 'json' } do
     collection do
+      post :search
       get :reading_list
       get :read_list
     end

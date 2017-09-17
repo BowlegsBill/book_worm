@@ -1,5 +1,6 @@
 @include bem-block(content-section) {
   border: 1px solid $whisper;
+  margin-top: 20px;
 
   @include bem-element(header) {
     background-color: $curious-blue;

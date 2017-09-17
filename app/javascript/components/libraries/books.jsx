@@ -13,18 +13,35 @@ class Books extends React.Component {
     }
   }
 
-  componentDidMount() {
-    $.ajax({
-      type: 'GET',
-      url: '/books',
-      dataType: 'json',
-      success: (data) => {
-        this.setState({books: data, isLoading: false})
-      }
-    })
+  // componentDidMount() {
+  //   $.ajax({
+  //     type: 'GET',
+  //     url: '/books',
+  //     dataType: 'json',
+  //     success: (data) => {
+  //       this.setState({books: data, isLoading: false})
+  //     }
+  //   })
+  // }
+
+  handleChange(e) {
+    if (e.target.value.length >= 3) {
+      var stateObj = {}
+      stateObj[e.target.name] = e.target.value
+      $.ajax({
+        type: 'POST',
+        url: '/books/search',
+        data: stateObj,
+        dataType: 'json',
+        success: (data) => {
+          this.setState({books: data})
+        }
+      })
+    }
   }
 
-  render() {
+
+  renderBooks() {
     var books = this.state.books.map(function(book, index) {
       return(
         <tr key={book.id}>
@@ -35,12 +52,8 @@ class Books extends React.Component {
         </tr>
       )
     })
-    return (
-      <LoadingOverlay
-        spinner
-        active={this.state.isLoading}
-        background='#e7e7e7'
-      >
+    if (this.state.books.length > 0) {
+      return (
         <table className='table table-striped table-hover'>
           <thead>
             <tr>
@@ -53,7 +66,29 @@ class Books extends React.Component {
             {books}
           </tbody>
         </table>
-      </LoadingOverlay>
+      )
+    } else {
+      return(
+        <h3>Search by title or author for books to add to your reading list</h3>
+      )
+    }
+  }
+
+  render() {
+    return(
+      <div>
+        <div className="row">
+          <div className="col-lg-6">
+            <label>Title</label>
+            <input type="text" name='title' className="form-control" placeholder='Search by title' autoComplete='off' onChange={this.handleChange.bind(this)} />
+          </div>
+          <div className="col-lg-6">
+            <label>Author</label>
+            <input type="text" name='author' className="form-control" placeholder='Search by author' autoComplete='off' onChange={this.handleChange.bind(this)} />
+          </div>
+        </div>
+        {this.renderBooks()}
+      </div>
     )
   }
 }

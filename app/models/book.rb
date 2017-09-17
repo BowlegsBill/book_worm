@@ -10,6 +10,11 @@ class Book < ApplicationRecord
   # ----------------------------------------------------------------
   # Attributes
   # ----------------------------------------------------------------
+  enum genre: { science_fiction: 1, satire: 2, drama: 3, action_and_adventure: 4,
+    romance: 5, mystery: 6, horror: 7, self_help: 8, health: 9, guide: 10,
+    travel: 11, childrens: 12, religion_spirituality_and_new_age: 13, science: 14,
+    history: 15, math: 16, anthology: 17, poetry: 18, comics: 19, art: 20,
+    cookbook: 21, diary: 22, journal: 23, biography: 24, autobiography: 25, fantasy: 26 }
 
   # ----------------------------------------------------------------
   # Associations
@@ -23,6 +28,7 @@ class Book < ApplicationRecord
   validates(
     :title,
     :author,
+    :genre,
     presence: true
   )
 

@@ -35,24 +35,18 @@ export default class ReadingList extends React.Component {
       )
     })
     return (
-      <LoadingOverlay
-        spinner
-        active={this.state.isLoading}
-        background='#e7e7e7'
-      >
-        <table className='table table-striped table-hover'>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Author</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {books}
-          </tbody>
-        </table>
-      </LoadingOverlay>
+      <table className='table table-striped table-hover'>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {books}
+        </tbody>
+      </table>
     )
   }
 }

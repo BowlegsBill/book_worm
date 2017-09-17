@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 export default class BookForm extends React.Component {
   initialState() {
-    return { title: '', author: '', errors: [] }
+    return { title: '', author: '', genre: '', errors: [] }
   }
 
   constructor(props) {
@@ -25,11 +25,6 @@ export default class BookForm extends React.Component {
         }
       }
     })
-  }
-
-  handleChange(e) {
-    var name = e.target.name
-    this.setState({name: e.target.value})
   }
 
   showErrors() {
@@ -63,6 +58,12 @@ export default class BookForm extends React.Component {
             Author
           </label>
           <input onChange={(e) => this.setState({author: e.target.value})} className='form-control' id='author' name='author' value={this.state.author} />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='genre'>
+            Genre
+          </label>
+          <input onChange={(e) => this.setState({genre: e.target.value})} className='form-control' id='genre' name='genre' value={this.state.genre} />
         </div>
         <div className='form-group'>
           <button className='btn btn-primary' type='submit'>
