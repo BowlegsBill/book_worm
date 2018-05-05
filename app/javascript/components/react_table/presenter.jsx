@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import { CSSTransitionGroup } from 'react-transition-group'
+
 import Row from './row'
 
 export default class Presenter extends React.Component {
@@ -22,7 +24,15 @@ export default class Presenter extends React.Component {
 
   renderData() {
     return(
-      <tbody className="react-table__tbody">
+      <CSSTransitionGroup
+        component="tbody"
+        className="react-table__tbody"
+        transitionName="example"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}
+        transitionAppearTimeout={500}
+        transitionAppear={true}
+      >
         {this.props.rows.map((row, index) => {
           return(
             <Row
@@ -34,7 +44,7 @@ export default class Presenter extends React.Component {
             />
           )
         })}
-      </tbody>
+      </CSSTransitionGroup>
     )
   }
 

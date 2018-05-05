@@ -28,6 +28,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-loading-overlay": "^0.2.5",
+    "react-transition-group": "1.x",
     "react_ujs": "^2.2.1",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
