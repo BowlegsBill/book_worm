@@ -1,0 +1,59 @@
+$main-color: #0C3295;
+$main-color-light: lighten($main-color, 65%);
+$main-color-mid-light: lighten($main-color, 35%);
+
+.react-table {
+
+}
+
+.react-table__wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.react-table__table {
+  width: 100%;
+
+  thead {
+    border-bottom: 3px solid $main-color;
+  }
+
+  th {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: $main-color;
+    padding: 15px 10px;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  th:hover {
+    cursor: pointer;
+  }
+
+  .react-table--hover {
+    background: $main-color-light;
+  }
+
+  .react-table__tbody {
+    tr {
+      border-bottom: 1px solid #eee;
+    }
+
+    td {
+      font-size: 1.6rem;
+      padding: 10px;
+    }
+  }
+
+  .react-table__sort-up {
+    span {
+      border-top: 2px solid $main-color;
+    }
+  }
+
+  .react-table__sort-down {
+    span {
+      border-bottom: 2px solid $main-color;
+    }
+  }
+}
