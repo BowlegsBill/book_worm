@@ -1,9 +1,10 @@
-$main-color: #0C3295;
-$main-color-light: lighten($main-color, 65%);
-$main-color-mid-light: lighten($main-color, 35%);
+@import 'variables';
+@import 'options';
+@import 'sorting';
+@import 'row';
 
 .react-table {
-
+  font-size: 1.6rem;
 }
 
 .react-table__wrap {
@@ -36,24 +37,12 @@ $main-color-mid-light: lighten($main-color, 35%);
 
   .react-table__tbody {
     tr {
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid $light-grey;
     }
 
     td {
       font-size: 1.6rem;
       padding: 10px;
-    }
-  }
-
-  .react-table__sort-up {
-    span {
-      border-top: 2px solid $main-color;
-    }
-  }
-
-  .react-table__sort-down {
-    span {
-      border-bottom: 2px solid $main-color;
     }
   }
 }

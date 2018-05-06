@@ -14,7 +14,7 @@ export default class Row extends React.Component {
       )
     })
     return(
-      <tr>
+      <tr className='react-table__row'>
         {tableData}
       </tr>
     )

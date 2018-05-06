@@ -7,4 +7,19 @@
 </div>
  -->
 
- <%= react_component 'react_table/index' %>
+<%= react_component 'react_table/index',
+  headers: { title: 'Title', author: 'Author', genre: 'Genre', year_published: 'Year published' },
+  rows: [
+          { title: 'Harry Potter', author: 'J. K. Rowling', genre: 'Fantasy', year_published: 1990 },
+          { title: 'Lord of the rings', author: 'J.R.R Tolkien', genre: 'Fantasy', year_published: 1950 },
+          { title: 'Eloquent Ruby', author: 'Some guy', genre: 'Learning', year_published: 2003 },
+          { title: 'Code: The hidden language' , author: 'Another guy', genre: 'Learning', year_published: 2000},
+          { title: 'The Thunderbolt kid', author: 'Bill Bryson', genre: 'Autobiography', year_published: 2010},
+          { title: 'Simpsons guide', author: 'Matt Groening', genre: 'Fiction', year_published: 1989},
+          { title: 'The Da Vinci Code', author: 'Dan Brown', genre: 'Fiction', year_published: 2001},
+          { title: 'Love and Ruin', author: 'Paula McCain', genre: 'Romance', year_published: 2018},
+          { title: 'Llama Llama loves to read', author: 'Anna D', genre: 'Children', year_published: 2018},
+          { title: 'Old Black Magic', author: 'Ace Atkins', genre: 'Non fiction', year_published: 2018},
+          { title: 'Into the Water', author: 'Paula Hawkins', genre: 'Fiction', year_published: 2018}
+      ]
+%>

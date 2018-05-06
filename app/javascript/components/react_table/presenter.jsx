@@ -3,17 +3,28 @@ import ReactDOM from 'react-dom'
 
 import { CSSTransitionGroup } from 'react-transition-group'
 
+import Options from './options'
 import Row from './row'
 
 export default class Presenter extends React.Component {
+  headerWidth() {
+    let width = (100 / (Object.keys(this.props.headers).length)) + '%'
+    return {width: width}
+  }
+
   renderHeaders() {
     return(
       <thead>
         <tr>
           {Object.keys(this.props.headers).map((key, index) => {
             return(
-              <th key={index} data-sort={key} onClick={this.props.handleSort}>
-                <span>{this.props.headers[key]}</span>
+              <th
+                key={index}
+                data-sort={key}
+                className="react-table__sort"
+                onClick={this.props.handleSort}
+                style={this.headerWidth()}>
+                {this.props.headers[key]}
               </th>
             )
           })}
@@ -27,11 +38,9 @@ export default class Presenter extends React.Component {
       <CSSTransitionGroup
         component="tbody"
         className="react-table__tbody"
-        transitionName="example"
+        transitionName="react-table__row"
         transitionEnterTimeout={500}
         transitionLeaveTimeout={300}
-        transitionAppearTimeout={500}
-        transitionAppear={true}
       >
         {this.props.rows.map((row, index) => {
           return(
@@ -53,6 +62,7 @@ export default class Presenter extends React.Component {
     return(
       <div className="react-table">
         <div className="react-table__wrap">
+          <Options {...this.props} />
           <table className="react-table__table">
             {colgroups}
             {this.renderHeaders()}

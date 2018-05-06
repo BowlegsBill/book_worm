@@ -1,0 +1,89 @@
+.react-table__options {
+  display: flex;
+  border-bottom: 1px solid $light-grey;
+}
+
+.react-table__option {
+  padding: 10px 15px;
+  cursor: pointer;
+  position: relative;
+  flex: 1;
+}
+
+.react-table__option:nth-child(odd) {
+  background: $light-grey;
+}
+
+.react-table__option:after {
+  position: absolute;
+  left: 50%;
+  content: '';
+  height: 3px;
+  background: $main-color;
+  transition: all 0.2s linear;
+  width: 0;
+  bottom: -3px;
+}
+
+.react-table__option--active:after {
+  width: 100%;
+  left: 0px;
+}
+
+.react-table__dropdown {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 2px solid $light-grey;
+  position: absolute;
+  background: #fff;
+  z-index: 2;
+  top: 105%;
+  left: 0;
+  width: 100%;
+}
+
+.react-table__dropdown-item {
+  padding: 15px;
+  border-bottom: 2px solid $light-grey;
+}
+
+.react-table__dropdown-item:hover {
+  cursor: pointer;
+  background: $main-color-light;
+}
+
+.react-table__dropdown-item:last-of-type {
+  border-bottom: 0;
+}
+
+.react-table__dropdown-item--inactive {
+  text-decoration: line-through;
+}
+
+.react-table__dropdown-leave {
+  max-height: 500px;
+  li {
+    opacity: 1;
+  }
+}
+
+.react-table__dropdown-leave-active {
+  max-height: 0;
+  // This needs to match the js exit timeout
+  transition: max-height 300ms ease-in;
+  li {
+    // This needs to be slowed than the parent animatino
+    transition: opacity 200ms ease-in;
+    opacity: 0
+  }
+}
+
+.react-table__option-input {
+  border: none;
+  width: 100%;
+}
+
+.react-table__option-input:focus {
+  outline: none;
+}
