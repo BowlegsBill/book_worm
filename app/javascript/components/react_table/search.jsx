@@ -19,7 +19,7 @@ export default class Search extends React.Component {
         <input
           className="react-table__option-input"
           type="text"
-          placeholder="Type here to search"
+          placeholder="Type here to search..."
           onFocus={(e) => (this.setState({isFocused: true}))}
           onBlur={(e) => (this.setState({isFocused: false}))}
           onChange={this.props.handleSearch} />

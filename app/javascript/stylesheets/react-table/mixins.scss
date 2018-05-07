@@ -1,0 +1,21 @@
+@mixin breakpoint($point) {
+
+  @if $point == micro {
+    @media (min-width: map-get($breakpoint-sizes, 'mc')) { @content; }
+  }
+  @else if $point == tiny {
+    @media (min-width: map-get($breakpoint-sizes, 'tn')) { @content; }
+  }
+  @else if $point == small {
+    @media (min-width: map-get($breakpoint-sizes, 'sm')) { @content; }
+  }
+  @else if $point == medium {
+    @media (min-width: map-get($breakpoint-sizes, 'md')) { @content; }
+  }
+  @else if $point == large {
+    @media (min-width: map-get($breakpoint-sizes, 'lg')) { @content; }
+  }
+  @else if $point == huge {
+    @media (min-width: map-get($breakpoint-sizes, 'hg')) { @content; }
+  }
+}

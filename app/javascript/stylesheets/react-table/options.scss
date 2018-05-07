@@ -1,13 +1,17 @@
 .react-table__options {
   display: flex;
   border-bottom: 1px solid $light-grey;
+  flex-direction: column;
+  @include breakpoint(small) {
+    flex-direction: row;
+  }
 }
 
 .react-table__option {
   padding: 15px;
   cursor: pointer;
   position: relative;
-  flex: 1;
+  width: 100%;
 }
 
 .react-table__option:nth-child(odd) {
@@ -28,6 +32,13 @@
 .react-table__option--active:after {
   width: 100%;
   left: 0px;
+}
+
+.react-table__option--export {
+  display: none;
+  @include breakpoint(small) {
+    display: block;
+  }
 }
 
 .react-table__dropdown {

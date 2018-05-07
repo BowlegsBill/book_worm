@@ -51,7 +51,7 @@ export default class Export extends React.Component {
   render() {
     return(
       <span
-        className={"react-table__option " + this.activeClass()}
+        className={"react-table__option react-table__option--export" + this.activeClass()}
         onClick={this.handleDropdownVisibility.bind(this)}>
         Export
         <CSSTransitionGroup
