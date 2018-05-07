@@ -10,6 +10,7 @@ export default class ReactTable extends React.Component {
       headers: this.props.headers,
       allHeaders: this.props.headers,
       rows: this.props.rows,
+      title: this.props.title,
       totalNumberOfRows: this.props.rows.length,
       search: '',
       handleSort: this.handleSort.bind(this),

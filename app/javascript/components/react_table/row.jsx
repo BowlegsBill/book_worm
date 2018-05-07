@@ -1,8 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { CSSTransitionGroup } from 'react-transition-group'
-
 export default class Row extends React.Component {
   renderData(column) {
     if (this.props.activeRows[this.props.index]) {

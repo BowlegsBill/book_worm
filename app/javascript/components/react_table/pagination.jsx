@@ -15,7 +15,7 @@ export default class Pagination extends React.Component {
         <span className="react-table__pagination-main">
           <span style={{marginRight: '5px'}}>Page</span>
           <input type="number" value={this.props.activePage} onChange={this.props.handleActivePageChange} />
-          <span style={{marginLeft: '5px'}}>of {this.props.totalNumberOfRows}</span>
+          <span style={{marginLeft: '5px'}}>of {Math.ceil(this.props.totalNumberOfRows / this.props.resultsPerPage)}</span>
         </span>
         <button
           className="react-table__pagination-button"
