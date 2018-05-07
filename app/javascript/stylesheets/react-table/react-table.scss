@@ -2,6 +2,7 @@
 @import 'options';
 @import 'sorting';
 @import 'row';
+@import 'pagination';
 
 .react-table {
   font-size: 1.6rem;
@@ -33,16 +34,5 @@
 
   .react-table--hover {
     background: $main-color-light;
-  }
-
-  .react-table__tbody {
-    tr {
-      border-bottom: 1px solid $light-grey;
-    }
-
-    td {
-      font-size: 1.6rem;
-      padding: 10px;
-    }
   }
 }

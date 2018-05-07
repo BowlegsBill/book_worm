@@ -8,7 +8,12 @@
  -->
 
 <%= react_component 'react_table/index',
-  headers: { title: 'Title', author: 'Author', genre: 'Genre', year_published: 'Year published' },
+  headers: [
+    { display: 'Title', sort: 'title' },
+    { display: 'Author', sort: 'author' },
+    { display: 'Genre', sort: 'genre' },
+    { display: 'Year published', sort: 'year_published' }
+  ],
   rows: [
           { title: 'Harry Potter', author: 'J. K. Rowling', genre: 'Fantasy', year_published: 1990 },
           { title: 'Lord of the rings', author: 'J.R.R Tolkien', genre: 'Fantasy', year_published: 1950 },

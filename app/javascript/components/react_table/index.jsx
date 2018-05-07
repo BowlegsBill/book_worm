@@ -10,32 +10,36 @@ export default class ReactTable extends React.Component {
       headers: this.props.headers,
       allHeaders: this.props.headers,
       rows: this.props.rows,
-      handleMouseEnter: this.handleMouseEnter.bind(this),
-      handleMouseLeave: this.handleMouseLeave.bind(this),
+      totalNumberOfRows: this.props.rows.length,
+      search: '',
       handleSort: this.handleSort.bind(this),
       handleToggleColumns: this.handleToggleColumns,
-      handleSearch: this.handleSearch.bind(this)
+      changeActivePage: this.changeActivePage,
+      handleActivePageChange: this.handleActivePageChange.bind(this),
+      handleSearch: this.handleSearch.bind(this),
+      resultsPerPage: 10,
+      activePage: 1
     }
+  }
+
+  componentWillMount() {
+    this.getActiveRows()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if ((prevState.rows != this.state.rows) || prevState.activePage != this.state.activePage ) {
+      this.getActiveRows()
+    }
+  }
+
+  getActiveRows() {
+    let start = (this.state.activePage - 1) * this.state.resultsPerPage
+    let end = (this.state.activePage * this.state.resultsPerPage)
+    this.setState({activeRows: this.state.rows.slice(start, end)})
   }
 
   originalRows() {
     return this.props.rows
-  }
-
-  handleMouseEnter(event) {
-    let elm = event.target
-    let parent = elm.parentNode
-    let index = ([...parent.children].indexOf(elm))
-    parent.classList.add('react-table--hover')
-    document.getElementsByTagName('colgroup')[index].classList.add('react-table--hover')
-  }
-
-  handleMouseLeave(event) {
-    let elm = event.target
-    let parent = elm.parentNode
-    let index = ([...parent.children].indexOf(elm))
-    parent.classList.remove('react-table--hover')
-    document.getElementsByTagName('colgroup')[index].classList.remove('react-table--hover')
   }
 
   removeSortingClasses() {
@@ -59,8 +63,10 @@ export default class ReactTable extends React.Component {
   }
 
   handleSearch(event) {
-    this.setState({rows: this.filterData(this.originalRows(), event.target.value)}, () =>
-      this.sortRows()
+    this.setState({search: event.target.value}, () =>
+      this.setState({rows: this.filterData(this.originalRows(), this.state.search)}, () =>
+        this.sortRows()
+      )
     )
   }
 
@@ -77,7 +83,7 @@ export default class ReactTable extends React.Component {
     } else if (event.currentTarget.classList.contains('react-table__sort-up'))  {
       this.removeSortingClasses()
       this.setState({sortDirection: '', sortAttribute: ''}, () =>
-        this.setState({rows: this.originalRows()})
+        this.setState({rows: this.filterData(this.originalRows(), this.state.search)})
       )
     } else {
       this.removeSortingClasses()
@@ -88,17 +94,43 @@ export default class ReactTable extends React.Component {
     }
   }
 
+  handleActivePageChange (event) {
+    let number = event.target.value
+    if ((event.target.value * this.state.resultsPerPage) > this.state.rows.length) {
+      number = Math.ceil(this.state.rows.length / this.state.resultsPerPage)
+    } else if (event.target.value == 0) {
+      number = 1
+    }
+    this.setState({activePage: number})
+  }
+
   handleToggleColumns = (headerKey) => (e) => {
     // The parent of this element also has a click event, so we need to stop this event from
     // propagating (stops the dropdown being closed)
     e.stopPropagation()
-    let selectedHeaders = this.state.headers
-    if (selectedHeaders.hasOwnProperty(headerKey)) {
-      delete selectedHeaders[headerKey]
+    // Get the header from the array of all the headers
+    let selectedHeader = this.state.allHeaders.filter(header => (header.sort == headerKey))[0]
+    let selectedHeaders
+    if (this.state.headers.indexOf(selectedHeader) >= 0) {
+      // Return the array minus the element if it already exists in the active array
+      selectedHeaders = this.state.headers.filter(header => (header.sort != headerKey))
     } else {
-      selectedHeaders[headerKey] = this.state.allHeaders[headerKey]
+      // Add the header into the active array
+      let oldHeaders = this.state.headers.slice(0)
+      oldHeaders.splice(this.state.allHeaders.indexOf(selectedHeader), 0, selectedHeader)
+      selectedHeaders = oldHeaders
     }
     this.setState({headers: selectedHeaders})
+  }
+
+  changeActivePage = (pageNumber) => (e) => {
+    let number = pageNumber
+    if ((pageNumber * this.state.resultsPerPage) > this.state.rows.length) {
+      number = Math.ceil(this.state.rows.length / this.state.resultsPerPage)
+    } else if (pageNumber == 0) {
+      number = 1
+    }
+    this.setState({activePage: number})
   }
 
   render() {

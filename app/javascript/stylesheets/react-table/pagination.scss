@@ -1,0 +1,44 @@
+.react-table__pagination {
+  display: flex;
+}
+
+.react-table__pagination-main {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input {
+    width: 50px;
+    border-radius: 5px;
+    border: 1px solid $grey;
+    text-align: center;
+  }
+}
+
+.react-table__pagination-button {
+  flex: 1;
+  cursor: pointer;
+  transition: all .3s linear;
+  padding: 15px;
+  text-align: center;
+}
+
+.react-table__pagination-button:focus {
+  outline: none;
+}
+
+.react-table__pagination-button:first-of-type,
+.react-table__pagination-button:last-of-type {
+  background: $light-grey;
+}
+
+.react-table__pagination-button:hover {
+  background: darken($light-grey, 30%);
+  color: #fff;
+}
+
+.react-table__pagination-button:disabled {
+  cursor: not-allowed;
+  background: $light-grey;
+  color: #BBB;
+}

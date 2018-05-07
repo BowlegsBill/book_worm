@@ -12,7 +12,7 @@ export default class ColumnToggle extends React.Component {
   }
 
   activeItemClass(attr) {
-    if (this.props.headers.hasOwnProperty(attr)) {
+    if (this.props.headers.filter(header => (header.sort == attr)).length > 0) {
       return 'react-table__dropdown-item'
     } else {
       return 'react-table__dropdown-item react-table__dropdown-item--inactive'
@@ -23,10 +23,10 @@ export default class ColumnToggle extends React.Component {
     if (this.state.showHeaderDropdown) {
       return(
         <ul className="react-table__dropdown">
-          {Object.keys(this.props.allHeaders).map((key, index) => {
+          {this.props.allHeaders.map((header, index) => {
             return(
-              <li key={index} className={this.activeItemClass(key)} onClick={this.props.handleToggleColumns(key)}>
-                {this.props.allHeaders[key]}
+              <li key={index} className={this.activeItemClass(header.sort)} onClick={this.props.handleToggleColumns(header.sort)}>
+                {header.display}
               </li>
             )
           })}

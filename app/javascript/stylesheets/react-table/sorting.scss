@@ -4,12 +4,13 @@
 
 .react-table__sort:after {
   position: absolute;
-  left: 15%;
   content: '';
   height: 3px;
   background: $main-color;
   transition: all 0.2s linear;
   width: 0;
+  left: 10px;
+  bottom: 40px;
 }
 
 .react-table__sort-up:after {

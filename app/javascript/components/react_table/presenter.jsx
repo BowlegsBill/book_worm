@@ -1,30 +1,52 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { CSSTransitionGroup } from 'react-transition-group'
-
 import Options from './options'
 import Row from './row'
+import Pagination from './pagination'
 
 export default class Presenter extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      handleMouseEnter: this.handleMouseEnter.bind(this),
+      handleMouseLeave: this.handleMouseLeave.bind(this)
+    }
+  }
+
+  handleMouseEnter(event) {
+    let elm = event.currentTarget
+    let parent = elm.parentNode
+    let index = ([...parent.children].indexOf(elm))
+    parent.classList.add('react-table--hover')
+    document.getElementsByTagName('colgroup')[index].classList.add('react-table--hover')
+  }
+
+  handleMouseLeave(event) {
+    let elm = event.currentTarget
+    let parent = elm.parentNode
+    let index = ([...parent.children].indexOf(elm))
+    parent.classList.remove('react-table--hover')
+    document.getElementsByTagName('colgroup')[index].classList.remove('react-table--hover')
+  }
+
   headerWidth() {
-    let width = (100 / (Object.keys(this.props.headers).length)) + '%'
-    return {width: width}
+    return {width: (100 / (this.props.headers.length)) + '%'}
   }
 
   renderHeaders() {
     return(
       <thead>
         <tr>
-          {Object.keys(this.props.headers).map((key, index) => {
+          {this.props.headers.map((header, index) => {
             return(
               <th
                 key={index}
-                data-sort={key}
+                data-sort={header.sort}
                 className="react-table__sort"
                 onClick={this.props.handleSort}
                 style={this.headerWidth()}>
-                {this.props.headers[key]}
+                {header.display}
               </th>
             )
           })}
@@ -33,32 +55,33 @@ export default class Presenter extends React.Component {
     )
   }
 
+  renderPagination() {
+    return(
+      <Pagination {...this.props} />
+    )
+  }
+
   renderData() {
     return(
-      <CSSTransitionGroup
-        component="tbody"
-        className="react-table__tbody"
-        transitionName="react-table__row"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300}
-      >
-        {this.props.rows.map((row, index) => {
+      <tbody>
+        {[...Array(this.props.resultsPerPage).keys()].map((_, index) => {
           return(
             <Row
+              activeRows={this.props.activeRows}
               key={index}
-              row={row}
-              handleMouseEnter={this.props.handleMouseEnter}
-              handleMouseLeave={this.props.handleMouseLeave}
+              index={index}
+              handleMouseEnter={this.state.handleMouseEnter}
+              handleMouseLeave={this.state.handleMouseLeave}
               columns={this.props.headers}
             />
           )
         })}
-      </CSSTransitionGroup>
+      </tbody>
     )
   }
 
   render() {
-    let colgroups = Object.keys(this.props.headers).map(function(_, index) { return <colgroup key={index}></colgroup> })
+    let colgroups = this.props.headers.map(function(_, index) { return <colgroup key={index}></colgroup> })
     return(
       <div className="react-table">
         <div className="react-table__wrap">
@@ -68,6 +91,7 @@ export default class Presenter extends React.Component {
             {this.renderHeaders()}
             {this.renderData()}
           </table>
+          {this.renderPagination()}
         </div>
       </div>
     )
